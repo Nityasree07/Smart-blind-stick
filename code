@@ -1,0 +1,39 @@
+const int buzzer = 11;
+const int PIN_RED = 5;
+const int PIN_GREEN = 6;
+const int PIN_BLUE = 7;
+
+long duration;
+int distance;
+
+void setup(){
+  pinMode(trigPin,OUTPUT);
+  pinMode(echoPin,INPUT);
+  pinMode(buzzer,OUTPUT);
+  pinMode(PIN_RED, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop(){
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration*0.034/2;
+
+    if (distance <= 20){
+    digitalWrite(buzzer, HIGH);
+    digitalWrite(PIN_RED, HIGH);
+  }
+  else{
+    digitalWrite(buzzer, LOW);
+    digitalWrite(PIN_RED, LOW);
+    }
+
+Serial.print("Distance:");
+Serial.println(distance);
+}
